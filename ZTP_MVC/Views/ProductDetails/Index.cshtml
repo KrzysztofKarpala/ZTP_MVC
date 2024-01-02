@@ -1,0 +1,53 @@
+﻿@model ZTP_MVC.Models.ProductResponseDto
+
+@{
+    ViewData["Title"] = "ProductDetailsView";
+}
+
+<h1>ProductDetails</h1>
+
+<div>
+    <form asp-action="Update" asp-controller="ProductDetails" method="post">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductId)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="ProductId" class="form-control" readonly/>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="ProductName" class="form-control" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </dt>
+            <dd class="col-sm-10">
+                <textarea asp-for="ProductDescription" class="form-control"></textarea>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductQuantity)
+            </dt>
+            <dd class="col-sm-1">
+                <input asp-for="ProductQuantity" class="form-control" />
+            </dd>
+        </dl>
+
+        <div class="btn-group" role="group">
+            <a asp-action="NavigateToProducts" class="btn btn-primary" style="margin-right: 190px;">Back to List</a>
+            <button type="submit" class="btn btn-warning">Update</button>
+        </div>
+    </form>
+    <div class="btn-group" role="group">
+        <form asp-action="SubtractQuantity" asp-controller="ProductDetails" method="post">
+            <input type="hidden" name="id" value="@Model.ProductId" />
+            <button type="submit" class="btn btn-danger" @(Model.ProductQuantity == 0 ? "disabled" : "") style="margin-right: 213px;">Odejmij</button>
+        </form>
+        <form asp-action="IncrementQuantity" asp-controller="ProductDetails" method="post">
+            <input type="hidden" name="id" value="@Model.ProductId" />
+            <button type="submit" class="btn btn-success">Dodaj</button>
+        </form>
+    </div>
+</div>

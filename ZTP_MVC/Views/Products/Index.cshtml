@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ZTP_MVC.Models.ProductResponseDto>
+
+@{
+    ViewData["Title"] = "Products Page";
+}
+
+<h1>Products</h1>
+
+<p>
+    <form asp-action="Create" method="post" style="margin-right: 10px;">
+        <button type="submit" class="btn btn-success">Create product</button>
+    </form>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductQuantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuantity)
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <form asp-action="Details" method="get" style="margin-right: 10px;">
+                            <input type="hidden" name="id" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-info">Details</button>
+                        </form>
+                        <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="id" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
